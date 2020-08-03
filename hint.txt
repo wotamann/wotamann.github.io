@@ -1,0 +1,8 @@
+css dir must be extracted from docs, otherwise static site doesn't work in Chrome Browser
+
+css
+docs 
+	-js
+	-fonts
+	index.html
+	
