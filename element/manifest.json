@@ -1,19 +1,20 @@
 {
-  "element-icons.woff": {
-    "file": "assets/element-icons.0bf2ea75.woff"
-  },
-  "element-icons.ttf": {
-    "file": "assets/element-icons.a8267d41.ttf"
-  },
-  "index.js": {
+  "index.html": {
+    "file": "assets/index.4750714a.js",
+    "src": "index.html",
     "isEntry": true,
-    "isDynamicEntry": false,
-    "file": "assets/index.16e20b09.js",
-    "imports": [],
-    "dynamicImports": [],
-    "facadeModuleId": "index.html"
+    "imports": [
+      "_vendor.acd96388.js"
+    ],
+    "css": [
+      "assets/index.be41414b.css"
+    ],
+    "assets": [
+      "assets/element-icons.ab40a589.woff",
+      "assets/element-icons.a30f5b3b.ttf"
+    ]
   },
-  "index.css": {
-    "file": "assets/index.7829bef9.css"
+  "_vendor.acd96388.js": {
+    "file": "assets/vendor.acd96388.js"
   }
 }
