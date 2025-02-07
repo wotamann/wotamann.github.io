@@ -3,7 +3,7 @@
 </style>
 <style scoped>
   .bg { background-color: #f6f6f6;margin-bottom: 6px;}
-  .pre { font-size: 1rem; line-height:125%; text-align: left;  }
+  .pre { font-size: 1rem; line-height:125%; text-align: left; min-height: 2rem; }
   .terminal { color: #b75501; height: 5rem; overflow: auto; }
   .model { color:#0d6dc2; max-height: 400px; overflow-y: auto;}
   .model:focus {  outline: none; background-color: #0d6ec220; }
@@ -36,7 +36,9 @@
         Model
         <v-icon class="icon-right" icon="mdi-content-copy" @click="copyToClipboard('Model', toJSON(modelValue))" />    
         <v-icon class="icon-right" icon="dummy" />          
-        <v-icon class="icon-right" icon="mdi-update" @click="updateModel" />          
+        <v-icon class="icon-right" icon="mdi-restart" @click="resetModel" />         
+        <v-icon class="icon-right" icon="dummy" />          
+        <v-icon class="icon-right" icon="mdi-arrow-up-thin-circle-outline" @click="updateModel" />         
       </h5>      
     </v-col>
     <v-col cols="6" class="pt-2">
@@ -44,7 +46,9 @@
         Schema
         <v-icon class="icon-right" icon="mdi-content-copy" @click="copyToClipboard('Schema', toJSON(schemaValue))" />
         <v-icon class="icon-right" icon="dummy" />          
-        <v-icon class="icon-right" icon="mdi-update" @click="updateSchema" />         
+        <v-icon class="icon-right" icon="mdi-restart" @click="resetSchema" />         
+        <v-icon class="icon-right" icon="dummy" />          
+        <v-icon class="icon-right" icon="mdi-arrow-up-thin-circle-outline" @click="updateSchema" />         
       </h5>
     </v-col> 
     <v-col cols="6" class="pb-2">
@@ -77,14 +81,17 @@
 
 <script setup>
   import { isFunction } from 'lodash';
-  import { inject, provide, ref, reactive, toRefs, nextTick, watch, watchEffect, computed, onMounted, useTemplateRef } from 'vue'
+  import { inject, provide, ref, unref, reactive, toRefs, nextTick, watch, watchEffect, computed, onMounted, useTemplateRef } from 'vue'
   import { useRoute } from 'vue-router';
   // CONST
   const modelValue = defineModel('modelValue')
   const schemaValue = defineModel('schemaValue')
-  
+   
   const preModel = useTemplateRef('pre-model')
   const preSchema = useTemplateRef('pre-schema')
+  
+  const resetModelValue = unref(modelValue.value)
+  const resetSchemaValue = unref(schemaValue.value)
 
   const route = useRoute()
   const props = defineProps({editable:{type:Boolean, default: true }})
@@ -92,7 +99,8 @@
   
   // const url = 'https://github.com/wotamann/vuetify-form-base/blob/master/example/src/components'
   // READ FILES FROM ./PUBLIC/COMPONNENTS
-  const url = './components' 
+  const url = './components'
+  const functionPlaceholder = '[Function]' 
   const fileObjectToString = (val) => `${val.name} - (File Object)` 
   const fileName = ref(`${route.path?.slice(1)}.vue`)
   const path = `${url}/${fileName.value}`
@@ -112,11 +120,9 @@
 
   const replacer = (key, value) => {
     if (typeof value === 'function') {
-      // return value.toString().substring(0,24)+ '... - (Function)' 
-      return '[Function]' 
+      return functionPlaceholder 
     }  
     if (Array.isArray(value) && value[0] instanceof File) {
-      // map Fileobject to Filename
       return value.map(i => fileObjectToString(i) )
     }
     if (value instanceof File) {
@@ -154,6 +160,9 @@
     }
   }
 
+  const resetModel = () => {
+    preModel.value.innerText = toJSON(resetModelValue)
+  }
   const updateModel = () => {
     try {
       const model= JSON.parse(preModel.value.innerText)    
@@ -174,6 +183,9 @@
     }    
   }  
 
+  const resetSchema = () => {
+    preSchema.value.innerText = toJSON(resetSchemaValue)
+  }
   const updateSchema = () => {
     try {
       const schema= JSON.parse(preSchema.value.innerText)          

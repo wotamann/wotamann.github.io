@@ -21,10 +21,12 @@
   const onInput = logInput
   const onUpdateModelValue = logModel
   const onClickClear = (val, ev) => {
-    confirm (`INLINE CLICK-CLEAR | Delete '${ev.modelValueLast}'`) ? '': ev.modelValueLast  // return '' or value 
+    confirm (`INLINE CLICK-CLEAR | Delete '${ev.modelValueLast}'`) ? '': ev.modelValueLast  
+    return // undefined or value 
   }
-  const toUpperCase = val => val.toUpperCase() // return new uppercase value
-  //const toUpperCase = (val,ev) => ev.set(val?.toUpperCase() ) // new value set in function, don't return a new value
+  const toUpperCase = val => {
+    return val.toUpperCase() // return new uppercase value
+  }
   
   const visible = ref(false)
   const iconVisible = computed(()=> visible.value ? 'mdi-eye-off' : 'mdi-eye')

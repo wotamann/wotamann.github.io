@@ -26,7 +26,7 @@
   }
   const myModel = ref({
     text:'text',
-    email:'text@mail.at',    
+    email:'',    
     password:'ABCD1234',
     passwordConfirm:'',
     number:4,

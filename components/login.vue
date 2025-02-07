@@ -57,7 +57,7 @@
   }
   
   const myModel = ref({   
-    user:'user@mail.com',
+    user:'',
     password:'ABCD1234',
   })
   

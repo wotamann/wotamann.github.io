@@ -108,7 +108,7 @@ const rules = {
 }
 
 const myModel = ref({
-  email: 'base@',
+  email: '',
   password: 'abcde',
   select: null,
   multiple: ['Taleb'],
