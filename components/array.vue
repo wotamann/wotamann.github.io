@@ -1,10 +1,5 @@
-<style scoped >
-:deep(.tooltip-background-blue) { background-color: #2246d8;color:#ffffff;} 
-</style>
 <template>
-  <v-container class="container-box-new">
-  
-  <h4>add, edit and remove items in nested array</h4>
+  <h4>Add, edit and remove items in nested array</h4>
   
      <!-- FORM-BASE-COMPONENT -->
      <v-form-base 
@@ -15,16 +10,13 @@
         _noAutoSchema:false,
         _noAutoModel:true,
         _useOrder:true
-      }"  
-      
+      }"        
       :cols="12"
       @click="log"
       />
-      <!-- :tooltip="{ contentClass:'tooltip-background-blue'}" -->
     
    <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
    <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>
-  </v-container>
 </template>
 
 <script setup>
