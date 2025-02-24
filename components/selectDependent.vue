@@ -1,6 +1,6 @@
 <template>
   <v-container class="container-box-new">  
-   <h4>Selection depending from other Selection and hide if empty</h4>
+   <h4>Cascading Selection</h4>
       
     <!-- FORM-BASE-COMPONENT -->
     <v-form-base 

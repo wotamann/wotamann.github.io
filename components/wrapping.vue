@@ -1,11 +1,8 @@
 <template>
-  <v-container class="container-box-new">
-  
-    <h4>Create multiple views based on same 'wrapped' model </h4>
+    <h4>Build Views from 'wrapped' Model </h4>
     
     <!-- FORM-BASE-COMPONENT -->
     <v-form-base 
-      id="wrap-base"
       :model="myModel"
       :schema="mySchema"
       :cols="12"
@@ -14,73 +11,52 @@
 
     <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
     <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>
-  </v-container>
 </template>
 
 <script setup>
-import { ref, reactive, toRefs, computed, onMounted, onUnmounted } from 'vue'
-
 import vFormBase from '@/vFormBase.vue'
 import Infoline from '@/components/infoline.vue'
+import { ref, reactive, toRefs, computed, onMounted, onUnmounted } from 'vue'
 import { log, logModel } from '@/lib'
 
-const text1 = { el: 'text', label:'Text', cols:9,}
-const check1 = { 
-  el: 'checkbox',
-  color:'red',
-  cols:2 
-}
+const text = { el: 'text', label:'Text', cols:5 }
+const check = { el: 'checkbox', color:'orange', label:'ORANGE',cols:4 }
+const deepCheck = { el: 'checkbox', color:'blue', label:'BLUE', cols:3 }
+const containerOutlined = (subtitle) => ({ el:'card', subtitle, variant:'outlined', color:'blue-darken-2', class:'pa-3'})
+const containerElevated = (subtitle) => ({ el:'card', subtitle, variant:'elevated', color:'orange-lighten-4', class:'pa-3'})
 
 const myModel = ref({
-  text1:'Text', 
-  check1:true  
+  text:'text', 
+  check:true,
+  deep:{
+    deepCheck:true,
+  }  
 })
+
 const mySchema = ref({
-  Level0: { 
-    el:'wrap', 
-    container:{ is:'v-sheet', color:'green-lighten-3', class:'pa-1' },
-    schema:{
-      text1,
-      check1,
-      Level1: { 
-        el:'wrap', 
+  vixew1: { 
+    el:'v-view',
+    container:containerOutlined('View'), 
+    schema:{ text, check,
+      viewNested: { 
+        el:'view',
         cols:9,
-        container:{ is:'v-sheet', color:'green-lighten-4', class:'pa-1' },
-        schema:{
-          text1,
-          check1,
-          Level2: { 
-            el:'wrap',          
-            cols:9,
-            container:{ is:'v-sheet', color:'green-lighten-5', class:'pa-1' },
-            schema:{
-              text1,          
-              check1
-            }
-          },
-        }
+        container:containerOutlined('View Inside'), 
+        schema:{ text, check, deep:{ deepCheck} }
       }          
     }
   },
-  Base0: { 
-    el:'wrap',          
+  Vixew2: { 
+    el:'v-view',
     cols:6,
-    container:{ is:'v-sheet', color:'blue-lighten-3', class:'pa-1' },
-    schema:{
-      text1,          
-      check1
-    }
+    container:containerOutlined('View Outside'), 
+    schema:{ text, check }
   },
-  Base1: { 
-    el:'wrap',          
+  vixew3: { 
+    el:'view',
     cols:6,
-    container:{ is:'v-sheet', color:'blue-lighten-4', class:'pa-1' },
-    schema:{
-      text1,          
-      check1
-    }
+    container:containerElevated('View Filled'), 
+    schema:{ text, check, deep:{ deepCheck} }
   },
-
 })
-
 </script>

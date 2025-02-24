@@ -1,21 +1,13 @@
 <template>
-  <h4>Async loading of Schema, Model and at last Grid-Layout</h4>
+  <h4>Async loading Component</h4>
 
   <!-- FORM-BASE-COMPONENT -->    
-  <v-form-base v-if="flush"
+  <v-form-base
     :model= "myModel"
     :schema= "mySchema"
-    :config= "myConfig"
     :cols= "myCols"
-    @input="log"
-  />
-
-  <p class="title">{{msg}}</p>      
-  <v-btn @click="changeCols">COLS</v-btn>
-  <v-btn @click="changeModel">Model</v-btn>
-  <v-btn @click="changeSchema">Schema</v-btn>
-  <v-btn @click="changeConfig">Config</v-btn>
-  
+    :config= "myConfig"
+    />
   <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
   <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>
 </template>
@@ -23,87 +15,42 @@
 <script setup>
 // import VFormBase from '@/vFormBase.vue'
 import Infoline from '@/components/infoline.vue'
-import { log } from '@/lib'
-import { ref, onMounted, defineAsyncComponent, nextTick  } from 'vue'
+import { ref, defineAsyncComponent  } from 'vue'
 
-let VFormBase = null
-const msg = ref('')
-const flush = ref(false)
-const myCols = ref(12)
-const myModel=ref({})
-const mySchema = ref({})
-const myConfig = ref({
-  _noShorthand: false, 
-  _noMapping:false, 
-  _noAutoSchema:false, 
-  _noAutoModel:false, 
-  _noNullValue:false,  //  
-  _useOrder:false 
+const myModel=ref({
+  text:'sync load',
+  checkAsync:true
 })
+const mySchema = ref({ 
+  text: { el:'text', _order:2000 }, 
+  check: { el:'checkbox',color:'green', label:'sync load' }, 
+})
+const myCols = ref({})
+const myConfig = ref({})
 
-const changeSchema = () => {
-  mySchema.value = {
-    checkbox:{ el:'checkbox', color:'amber' },      
-    checkbox1:{ el:'checkbox', color:'blue' },      
-    checkbox2:{ el:'checkbox', color:'red' },      
-    checkbox3:{ el:'checkbox', color:'green', _order:0 },      
-    name: { el:'text' }, 
-    name1: { el:'text' }, 
-  };
-  doUpdate()
-}
-
-const changeModel = () => {
-  myModel.value = {
-    name: 'text changed',
-    name1: 'text changed',
-    checkbox: true,      
-    checkbox1:true,      
-    checkbox2:true,      
-    checkbox3:true,      
-  };
-  doUpdate()
-}
-
-const changeCols = () => myCols.value = 3
-
-
-const changeConfig = () => {
-  myConfig.value = { ...myConfig.value, _useOrder:true } 
-  doUpdate()
-}
-
-onMounted( async () => {
-  // # STEP 1) Lazy loading of 'vformbase.vue' component here
-  await delay(VFormBase = defineAsyncComponent(() => import('@/vFormBase.vue')) )
-
-  // # STEP 2) Async loading of empty(!) schema
-  msg.value ="Loading Schema..."
-  mySchema.value = await delay(({
-    // // _noAutoSchema:false -> CREATE SCHEMA 
-    // name: { el:'textField' },
-    // checkbox:{ el:'checkbox',_order:1 }      
-  })),
+// ASYNC COMPONENT
+const VFormBase = defineAsyncComponent( async () => {
   
-  // # STEP 3) Async loading of model
-  msg.value ="Loading Model..."
-  myModel.value = await delay( ({ name: 'Base', checkbox: true }) )
-  doUpdate()
+  myModel.value =  mergePropsKeepReference(myModel.value, await delay( ({ textAsync: 'async load' }), 333 ) )
+  
+  myCols.value = await delay( {cols:4, offset:1}, 333)
+  
+  myConfig.value = await delay({ _useOrder:true }, 333) 
+  
+  mySchema.value = mergePropsKeepReference(mySchema.value, await delay( { 
+    textAsync: { el:'text', _order:2100 }, 
+    checkAsync: { el:'checkbox',color:'green', label:'async load' }, 
+  }, 333))
+  
+  return await delay(import('@/vFormBase.vue'),333)
+})  
 
-  // # STEP 4) Async loading of grid
-  msg.value ="Loading Grid..."
-  myCols.value = await delay({ cols:6 })
-    
-  // # STEP 5) Autogenerate schema and build component 
-  doUpdate()
-  msg.value =""
-})
 
-const doUpdate = () => {
-  flush.value=false
-  nextTick(() => flush.value=true)
+const delay = (obj, ms=333) => new Promise((resolve, reject) => setTimeout(() => resolve(obj), ms))
+const mergePropsKeepReference = (originalProps, additionalProps) => {
+  for (const key in additionalProps) {
+    if (additionalProps.hasOwnProperty(key)) originalProps[key] = additionalProps[key]; // Directly modify originalProps
+  }
+  return originalProps
 }
-
-const delay = (obj) => new Promise((resolve, reject) => setTimeout(() => resolve(obj), 999))
-
 </script>

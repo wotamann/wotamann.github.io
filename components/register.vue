@@ -1,26 +1,26 @@
 <template>
-  <v-container class="container-box">  
    <h4>Example Registration Form</h4>
   
       <!-- FORM-BASE-COMPONENT -->
      <v-form-base 
-       id="registration-demo"
-       :container="{ is:'form', class:'pa-10', style:'backgroundColor:#dddddd', action:'/grid'}"
+       id="registration"
+       :container="containerOptions"
        :model= "myModel"
        :schema= "mySchema"
-       cols="12"  
-       />
+       @click:registration-register="submit"
+      />
 
     <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
     <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>
 
-  </v-container>
 </template>
 
 <script setup>
   import vFormBase from '@/vFormBase.vue'
   import { ref, computed } from 'vue'
   import Infoline from '@/components/infoline.vue'
+  
+  const containerOptions = { el:'form', class:'pa-10', style:'backgroundColor:#e2e2e2', action:'/grid'}
   
   const visible = ref(false)
   const visibleIcon = computed(()=> visible.value ? 'mdi-eye-off' : 'mdi-eye')

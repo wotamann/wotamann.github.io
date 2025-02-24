@@ -1,18 +1,18 @@
 <template>
-  <v-container class="container-box-new">  
-   <h4>Create object and array in non existing model from schema</h4>
+  <h4>Build Object/Array Model from Schema</h4>
   
     <!-- FORM-BASE-COMPONENT -->
     <v-form-base 
-      id="partial-formbase"
       :model= "myModel"
       :schema= "mySchema"
+      :config="{_buildModel:false}"
+      :cols="6"
       @update= "logModel"
+
     />
     
     <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
     <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>
-  </v-container>
 </template>
 
 <script setup>
@@ -21,30 +21,32 @@
   import { ref } from 'vue'
   import { logModel } from '@/lib.js'
 
-  const myModel = ref({})
+  const myModel = ref({
+    // EMPTY MODEL - config_buildModel=true PRE BUILD / =false BUILD ON FLY 
+  })
 
   const mySchema =ref({
-    card1:{ el:'card', cols:12, title:'build model object', color:'red-lighten-2'},
+    card1:{ el:'v-card', title:'build model object', color:'red-lighten-1', cols:12},
     obj: {
       a:{
-        title: { el: 'text', nullValue:'object' },
-        done: { el: 'checkbox' },
+        title: { el: 'v-text-field', nullValue:'object' },
+        done: { el: 'v-checkbox' },
       },    
       b:{
-        title: { el: 'text' },
-        done: { el: 'checkbox' },
+        title: { el: 'v-text-field' },
+        done: { el: 'v-checkbox', nullValue:true },
       },    
     },
    
-    card2:{ el:'card', cols:12, title:'build model array', color:'indigo-lighten-1'}, 
+    card2:{ el:'v-card', title:'build model array', color:'indigo-lighten-1', cols:12}, 
     arr: [
       {
-        title: { el: 'text', nullValue:'array' },
-        done: { el: 'checkbox' },
+        title: { el: 'v-text-field', nullValue:'array' },
+        done: { el: 'v-checkbox' },
       },    
       {
-        title: { el: 'text',  },
-        done: { el: 'checkbox' },
+        title: { el: 'v-text-field',  },
+        done: { el: 'v-checkbox', nullValue:true },
       },    
     ]
 })

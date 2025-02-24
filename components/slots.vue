@@ -4,7 +4,7 @@
   :deep(.form){ padding:8px;  color: #001fb8; background-color: #001fb810 }
   :deep(.key){ color: #06b34e; background-color: #06b34e10 }
   :deep(.element){ color: #9c3a19; background-color: #9c3a1910 }
-  :deep(.item) { color: #484; background-color: #44884410}
+  :deep(.item) { color: #9c3a19; background-color: #9c3a1920}
 </style>
 
 <template>
@@ -18,31 +18,33 @@
       >
       
         <!-- SLOT SIGNATURE 
-        <template #slot-item-key-id-formbase-text2="{obj, id, index, attrs}"> 
+        <template #slot-item-key-id-formbase-text2="{obj, id, index, attrs}">         
+        <template #slot-[top|item|bottom]-[element|key]-[id component]-[key]="{obj, id, index, attrs}">
+        -->
         
-        <template #slot-[top|item|bottom]-[element|key]-[id component]-[key]="{obj, id, index, attrs}"> 
-        
-          -->
-        
-          <!-- FORM SLOTS -->
+          <!-- FORM SLOTS TOP/BOTTOM-->
         <template #slot-top-id-formbase="{id}"><p class="slot form">Top Slot of Component '{{ id }}'</p></template>
         <template #slot-bottom-id-formbase="{id}"><p class="slot form">Bottom Slot of Component '{{ id }}'</p></template>
         
-        <!-- KEY SLOTS -->
-        <!-- TOP of KEY -->
-        <template #slot-top-key-id-formbase-text1="{obj}"><p class="slot key">Slot at Top of Key '{{obj.key}}'</p></template>       
-        <!-- ITEM of KEY -->
-        <template #slot-item-key-id-formbase-text2="{obj, id, index, attrs}">
-          <p class="slot item">Slot replace Item with Key '{{obj.key}}'</p>
-        </template>
-        <!-- BOTTOM of KEY -->
+        <!-- KEY SLOTS TOP/BOTTOM -->
+        <template #slot-top-key-id-formbase-text1="{obj}"><p class="slot key">Slot at Top of Key '{{obj.key}}'</p></template>               
         <template #slot-bottom-key-id-formbase-text1="{obj, index, id}"><p class="slot key">Slot at Bottom of Key '{{obj.key}}'</p></template>      
         
-        <!-- ELEMENTS SLOTS -->
+        <!-- ELEMENTS TOP/BOTTOM/REPLACE-->
+        <template #slot-item-key-id-formbase-text2="{obj, id, index, attrs}">
+          <!-- REPLACE ELEMENTS WITH DIV -->
+          <div class="item" :style="{ padding:'8px', border:'1px solid #0a0'}">
+            <p class="slot item">Slot replace all '{{obj?.schema?.el}}' elements'</p>
+            <p class="slot item">Key '{{obj.key}}'</p>
+            <v-text-field :value="obj.value" @update:modelValue="event => attrs.model[obj.key] = event" />
+          </div>
+        </template>
         <template #slot-top-element-id-formbase-text="{obj}"><p class="slot element">Slot at Top of Element '{{obj?.schema?.el}}'</p></template>
         <template #slot-bottom-element-id-formbase-text ="{obj}"><p class="slot element">Slot at Bottom of Element '{{obj?.schema?.el}}'</p></template>
         
-       
+        <!-- VIEW -> GROUP/WRAP -->
+        <!-- <template #slot-top-view-formbase-group-level="{id}"/> -->
+   
 
       </v-form-base>
 

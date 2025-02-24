@@ -34,7 +34,7 @@
 
   const mySchema = ref({
     text: { el:'text', label:'name', autocomplete:'name'},
-    email: { el:'text', type:'email', label:'email', rules:[ rules.isEmail, rules.required], autocomplete:'email' },
+    email: { el:'text', type:'email', label:'email', rules:[ rules.isEmail], autocomplete:'email' },
     password:{ el:'text', type:'password', hint:'min 8 chars', label:'new password', rules:[ rules.min], autocomplete:'new-password'},
     passwordConfirm:{ el:'text', type:'password', label:'password confirmation', rules:[ rules.pwmatch ], autocomplete:'current-password'},
     number: { el:'numberInput', label:'Number', hint:'from 0 to 10 step 2', step:2, min:0, max:10, cols:2 },  

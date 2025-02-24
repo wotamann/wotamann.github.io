@@ -7,7 +7,7 @@
     :schema= "mySchema"             
     @update:customEvent="logCustomEvent"
   />
-
+{{ color }}
   <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
   <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>
 </template>
@@ -23,7 +23,7 @@
   const showColor = () => mySchema.value.color.hidden = !mySchema.value.color.hidden
 
   const myModel = ref({
-    text:'text',
+    text:'texty',
     selectMultiple:[2,4],
     switch:true,
     checkbox:true,
@@ -34,13 +34,13 @@
     // Props order in schema determines display order
     text: { el:'text', label:'label', color },     
     selectMultiple:{ el:'select', label:'select multiple', items, multiple:true, color },    
-    checkbox:{ el:'checkbox', label:'checkbox', cols:2, color }, 
+    checkbox:{ el:'box', label:'checkbox', cols:2, color }, 
     switch:{ el:'switch', label:'switch', cols:2, color },  
     iconB: { el:'icon', icon:'mdi-wifi', size:'2.4rem', cols:1, color },
     iconW: { el:'icon', icon:'mdi-bluetooth', size:'2.4rem', cols:1, color },
-    button: { el:'btn', text:'Set Color', block:true, color, onClick:showColor },  
+    button: { el:'v-btn', text:'Set Color', block:true, color, onClick:showColor },  
     // 
-    color: { el:'colorPicker', mode:'hex', hideInputs:true ,hidden:true  },
+    color: { el:'v-colorPicker', mode:'hex', hideInputs:true ,hidden:true  },
   })
   
 </script>

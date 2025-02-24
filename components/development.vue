@@ -145,7 +145,7 @@ const viewText = { el: 'text', label:'Text BOTH',  onInput, ['onUpdate_modelValu
 const viewTextMV = { el: 'text', label:'Text MV', ['onUpdate_modelValue']:onUpdateModelValue}
 const viewTextINP = { el: 'text', label:'Text INP', onInput}
 const viewCheck = { el: 'checkbox', label:'Text', color:'brown', cols:2,}
-const container = { is:'v-card', class:'pa-1', color:'orange-lighten-4'}
+const container = { el:'v-card', class:'pa-1', color:'orange-lighten-4'}
 
 const myModel = ref({  
   // base8:true,
@@ -207,27 +207,27 @@ const mySchema = ref({
   // base8Check: { el: 'checkbox', cols:2, label: 'BASECHECK', color: 'red', onClick:logInline },
   // base8Check: { el: 'checkbox', cols:2, label: 'BASE8Check', color: 'red', onInput},
   
-  baseTitle: {el: 'text', cols:3, tooltip:true, label: 'BASE', onMouseleave:onDebouncedMouseEvent, onMouseenter:onDebouncedMouseEvent,  onUpdateModelValue},  
+  // baseTitle: {el: 'text', cols:3, tooltip:true, label: 'BASE', onMouseleave:onDebouncedMouseEvent, onMouseenter:onDebouncedMouseEvent,  onUpdateModelValue},  
   // baseTitle: {el: 'text', cols:4, label: 'BASE', clickOutside:(v, e, obj, index, id) => console.error(v, e, obj, index, id)},  
   // baseTitle: {el: 'text', cols:3, label: 'BASE', ['onUpdate_modelValue']:logInline },  
   // baseTitle: {el: 'text', cols:4, label: 'BASE1', clearable:true, appendIcon:'mdi-menu', prependInnerIcon:'mdi-menu' },
   
   // baseTitle1: {el: 'text', cols:4, label: 'BASE', clearable:true, appendIcon:'mdi-menu', prependInnerIcon:'mdi-menu' },
-  baseTitle2: {el: 'text', cols:4, label: 'Tooltip2', tooltip:{ contentClass:'tooltip-background-green',location:'start', text:'HWELLO TOOLI'}  },
-  baseTitle3: {el: 'text', cols:4, hint:'PSST Hinweis',label: 'Tooltip3', tooltip:{ text:'@hint', location:'top',}  },
-  // baseTitle2: {el: 'text', cols:4, label: 'Tooltip', tooltip:'HWELLO TOOLI'  },
+  // baseTitle2: {el: 'text', cols:4, label: 'Tooltip2', tooltip:{ contentClass:'tooltip-background-green',location:'start', text:'HWELLO TOOLI'}  },
+  // baseTitle3: {el: 'text', cols:4, hint:'PSST Hinweis',label: 'Tooltip3', tooltip:{ text:'@hint', location:'top',}  },
+  // // baseTitle2: {el: 'text', cols:4, label: 'Tooltip', tooltip:'HWELLO TOOLI'  },
   
-  baseTitle1: {el: 'text', cols:3, label: 'BASE1', tooltip:'SO ein Blödsinn', clearable:true,  getVal:(e) => e?.toUpperCase(), 
-    appendIcon:'mdi-menu', 
-    prependInnerIcon:'mdi-menu',
-    onClickAppend, 
-    onClickPrependInner ,
-    onClickClear ,
-    //   // onInput,   
-  },
-  x:{el:'v-spacer', cols:2},
-  // button: { el:'btn', block:true, text:'click outside',  clickOutside: (a, o, i) => console.log('OUTSIDE', i, o?.key, a) },  // https://vuetifyjs.com/en/api/v-btn/    
-  // baseTitle: {el: 'text', cols:4, label: 'BASE', clearable:true, onClickClear, onInput, ['onUpdate_modelValue']:onUpdateModelValue },
+  // baseTitle1: {el: 'text', cols:3, label: 'BASE1', tooltip:'SO ein Blödsinn', clearable:true,  getVal:(e) => e?.toUpperCase(), 
+  //   appendIcon:'mdi-menu', 
+  //   prependInnerIcon:'mdi-menu',
+  //   onClickAppend, 
+  //   onClickPrependInner ,
+  //   onClickClear ,
+  //   //   // onInput,   
+  // },
+  // x:{el:'v-spacer', cols:2},
+  // // button: { el:'btn', block:true, text:'click outside',  clickOutside: (a, o, i) => console.log('OUTSIDE', i, o?.key, a) },  // https://vuetifyjs.com/en/api/v-btn/    
+  // // baseTitle: {el: 'text', cols:4, label: 'BASE', clearable:true, onClickClear, onInput, ['onUpdate_modelValue']:onUpdateModelValue },
   
   deep:{ 
     deepButton: { el: 'btn', cols:2, text: 'DEEP X', color: 'green' },
@@ -236,48 +236,52 @@ const mySchema = ref({
   },
 
   groupX:{ 
-    el:'group',
-    container:{ is:'v-sheet', class:'pa-1', color:'yellow-lighten-4'},
+    el:'group', 
+    // 
+    container:{ el:'v-sheet',  class:'pa-1', color:'yellow-lighten-4'},
     schema:{
       // groupCheck: { el: 'checkbox', cols:2, label: 'Group', color: 'yellow-darken-3'  },
-      groupCheck: { el: 'checkbox', cols:2, label: 'Group', color: 'yellow-darken-3' },
-      // groupTitle: {el: 'text', cols:6, label: 'Group', clearable:true,onInput,['onUpdate_modelValue']:onUpdateModelValue },
+      groupCheck: { el: 'v-checkbox', cols:2, label: 'Group', color: 'yellow-darken-3' },
+      groupTitle: {el: 'v-textarea', cols:6, label: 'Group', clearable:true,onInput,['onUpdate_modelValue']:onUpdateModelValue },
       // groupTitle: {el: 'text', cols:6, label: 'Group', clearable:true },
       // groupTitle: {el: 'text', cols:6, label: 'Group', clearable:true, onClickClear  },
       groupI8:{ 
-        el:'group',
-        container:{ is:'v-sheet', class:'pa-1', color:'amber-lighten-3'},
+        el:'group', 
+        // 
+        // container:{ el:'v-card', subtitle:'SUB TITLE',class:'pa-2', color:'amber-lighten-3'},
+        container:'v-card', // , subtitle:'SUB TITLE',class:'pa-2', color:'amber-lighten-3'},
         schema:{
           // groupCheck4: { el: 'checkbox', cols:2, label: 'Group', color: 'yellow-darken-3',onInput: logInline, onClbick:logInline },
           // groupCheck4: { el: 'checkbox', cols:2, label: 'Group', color: 'yellow-darken-3'},
           // groupCheck4: { el: 'checkbox', cols:2, label: 'Group', color: 'yellow-darken-3',onClickFormbaseGroupXGroupI8GroupCheck4:onClick },
-          groupCheck4: { el: 'checkbox', cols:2, label: 'Group', color: 'yellow-darken-3', onClick  },
+          groupCheck4: { el: 'v-checkbox', cols:2, label: 'Group', color: 'yellow-darken-3', onClick  },
           // groupTitle: {el: 'text', cols:6, label: 'Group', clearable:true, onInput,['onUpdate_modelValue']:onUpdateModelValue },
           // groupTitle: {el: 'text', cols:6, label: 'Group', clearable:true,onClickClear, ['onUpdate_modelValue']:onUpdateModelValue },
-          // groupTitle: {el: 'text', cols:6, label: 'Group', clearable:true, onInput },
-          groupTitle: {el: 'text', cols:6, label: 'Group', clearable:true, onClickClear  },
+          groupTitle: {el: 'v-text-field', cols:6, label: 'Group', clearable:true },
+          // groupTitle: {el: 'textLine', cols:6, label: 'Group', clearable:true, onInput },
+          groupTitle1: {el: 'v-text-field', cols:6, label: 'Group', clearable:true, onClickClear  },
         }
       },
     }
   },
 
-  arr:[ 
-    {baseTitle: {el: 'text', cols:4, label: 'NESTED ARRAY0 ', clearable:true }},
-    {baseTitle: {el: 'text', cols:4, label: 'NESTED ARRAY1 UPDATE', clearable:true }},
-    // {baseTitle: {el: 'text', cols:4, label: 'NESTED ARRAY2 UPDATE', onClick }},
-    {baseTitle: {el: 'text', cols:4, label: 'NESTED ARRAY1 UPDATE', clearable:true, onUpdateModelValue }},
-    // {baseTitle: {el: 'text', cols:4, label: 'NESTED ARRAY2 INPUT', clearable:true, onInput, }},
-  ],
+  // arr:[ 
+  //   {baseTitle: {el: 'text', cols:4, label: 'NESTED ARRAY0 ', clearable:true }},
+  //   {baseTitle: {el: 'text', cols:4, label: 'NESTED ARRAY1 UPDATE', clearable:true }},
+  //   // {baseTitle: {el: 'text', cols:4, label: 'NESTED ARRAY2 UPDATE', onClick }},
+  //   {baseTitle: {el: 'text', cols:4, label: 'NESTED ARRAY1 UPDATE', clearable:true, onUpdateModelValue }},
+  //   // {baseTitle: {el: 'text', cols:4, label: 'NESTED ARRAY2 INPUT', clearable:true, onInput, }},
+  // ],
    
   // view1: { 
-  //   el:'wrap', cols:6,
-  //   container:{ is:'v-card', title:'view1',  color:'brown-lighten-5'},
+  //   el:'view', cols:6,
+  //   container:{ el:'v-card', title:'view1',  color:'brown-lighten-5'},
   //   schema:{
   //     viewText,
   //     viewCheck,
   //     view2: { 
-  //       el:'wrap', cols:12,         
-  //       container:{ is:'v-card', title:'view2', color:'brown-lighten-3'},
+  //       el:'view', cols:12,         
+  //       container:{ el:'v-card', title:'view2', color:'brown-lighten-3'},
   //       schema:{
   //         viewText,          
   //         viewCheck
@@ -287,7 +291,7 @@ const mySchema = ref({
   // },
   
   // tasks: {
-  //   el: 'array', cols:6, container:{ is:'v-card', title:'ARRAY', color:'red-lighten-5'},
+  //   el: 'array', cols:6, container:{ el:'v-card', title:'ARRAY', color:'red-lighten-5'},
   //   schema: {
   //     // Add Task Button in Schema only 
   //     doneX1Test: { el: 'checkbox', cols:4, label: '1', color: 'red', offset: 0, cols: 2,  },
@@ -295,21 +299,21 @@ const mySchema = ref({
   //     title1: {el: 'text', cols:8, clearable:true  },      
       
   //     taS0k: {
-  //       el: 'array', cols:12, container:{ is:'v-sheet', color:'green-lighten-5'},
+  //       el: 'array', cols:12, container:{ el:'v-sheet', color:'green-lighten-5'},
   //       schema: {
   //         doneX1Test: { el: 'checkbox', cols:4, label: '2', color: 'green', offset: 0 },
   //         title2: { el: 'text', cols:8, clearable:true},
   //         // title2: { el: 'text', cols:8, clearable:true, clickOutside:(v, e, obj, index, id) => console.error(v, e, obj, id, index)},
           
   //         taskUP:{
-  //           el: 'array', container:{is:'v-sheet', color:'blue-lighten-4' },
+  //           el: 'array', container:{el:'v-sheet', color:'blue-lighten-4' },
   //           schema: {
   //             done3: { el: 'checkbox', cols:4, label: '3', color: 'blue', offset: 0 },
   //             title3: {el: 'text', cols:4 , clearable:true },
   //             titleGreat: {el: 'text', cols:4 , clearable:true },
   //             groupI8:{ 
   //               el:'group',
-  //               container:{ is:'v-sheet', class:'pa-1', color:'yellow-lighten-3'},
+  //               container:{ el:'v-sheet', class:'pa-1', color:'yellow-lighten-3'},
   //               schema:{
   //                 // groupCheck4: { el: 'checkbox', cols:2, label: 'Group', color: 'yellow-darken-3',onInput: logInline, onClbick:logInline },
   //                 // groupCheck4: { el: 'checkbox', cols:2, label: 'Group', color: 'yellow-darken-3'},

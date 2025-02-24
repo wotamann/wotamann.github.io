@@ -92,7 +92,7 @@
 
     group:{ 
       el:'group',
-      container:{ is:'v-sheet'},
+      container:{ el:'v-sheet'},
       schema:{
         groupCheck: { el: 'checkbox', cols:2, label: 'groupCheck' },
         groupTitle: {el: 'text', cols:8, label: 'groupTitle', clearable:true  },

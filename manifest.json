@@ -16,7 +16,7 @@
     "src": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.ttf"
   },
   "index.html": {
-    "file": "assets/index.26f9e5ae.js",
+    "file": "assets/index.bdb0d10f.js",
     "src": "index.html",
     "isEntry": true,
     "dynamicImports": [
@@ -34,7 +34,7 @@
     "isDynamicEntry": true
   },
   "style.css": {
-    "file": "assets/style.1a6480dc.css",
+    "file": "assets/style.a3a8b3c5.css",
     "src": "style.css"
   }
 }

@@ -1,18 +1,15 @@
 <template>
   <v-container class="container-box">  
-   <h4>Deep nested Objects </h4>
+   <h4>Deep nested Objects - prebuild model '_buildModel=true'</h4>
   
-      <!-- FORM-BASE-COMPONENT -->
-      <v-form-base 
-        id="formbase-deep"
-        :config="{ 
-          _useOrder:true
-        }"
-        :model= "myModel"
-        :schema= "mySchema"
-        @update="log"
-      />
-   
+    <!-- FORM-BASE-COMPONENT -->
+    <v-form-base
+      :config="{ _buildModel:true}"  
+      :model= "myModel"
+      :schema= "mySchema"
+      @update="log"
+    />
+
     <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
     <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>
   </v-container>
@@ -24,37 +21,43 @@
   import Infoline from '@/components/infoline.vue'
   import { log, logElement } from '@/lib.js'
 
-  const myModel = ref({
-    based: 'YES',         
-    nested: {
+  const myModel = ref({    
+    object: {
       a:{
-        check: false,         
+         check: false,         
         b:{
           check: true,         
-          c:{
-            check: false      
-          }
         }
       }
     }
+    // buildModel: {
+    //   a:{
+    //      check: false,         
+    //     b:{
+    //       check: true,         
+    //     }
+    //   }
+    // }
   })
 
   const mySchema = ref({
-    based: { el: 'checkbox', label:'BASED YES/NO', trueValue:'YES', falseValue:'NO', color:'#181' },         
-    nested: {
+    object: {
       a:{
-        check: { el: 'checkbox', label:'NESTED-A (Display@Last Pos)', color:'#c22', _order:9000 },         
+        check: { el: 'checkbox', label:'OBJECT A', color:'#c22' },         
         b:{
-          check: { el: 'checkbox', label:'NESTED-A-B', color:'#2cf' },         
-          c:{
-            check: { el: 'checkbox', label:'NESTED-A-B-C', color:'#da2' },         
-            d:{
-              check: { el: 'checkbox', label:'NESTED-A-B-C-D ', color:'#22f' },
-            },
-          }
-        },
-      }
-    } 
+          check: { el: 'checkbox', label:'OBJECT A.B', color:'#c22' },         
+        }
+      },
+    },
+    hr:{el:'divider', cols:12},
+    buildModel: {
+      a:{
+        check: { el: 'checkbox', label:'AUTO A', color:'#2cf', nullValue:true },         
+        b:{
+          check: { el: 'checkbox', label:'AUTO A.B', color:'#2cf' },         
+        }
+      },
+    }
   })
 
 </script>

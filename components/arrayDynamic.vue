@@ -18,7 +18,7 @@
 <script setup>
 import { ref } from 'vue'
 
-import VFormBase from '@/vformbase.vue'
+import VFormBase from '@/vFormBase.vue'
 import Infoline from '@/components/infoline.vue'
 import { log, logModel } from '@/lib'
 
@@ -33,15 +33,15 @@ const myModel= ref({
 
 const mySchema= ref({      
   dynArray: {
-    el:'array',    
-    container:{ is:'v-sheet', color:'grey-lighten-5'},     
+    el:'v-array',    
+    container:{ el:'frame', },     
     schema: {
       done: { el: 'checkbox', cols:3 },
       title: { el: 'text', cols: 9 }
     }
   },
   add: { 
-    el: 'btn', 
+      el: 'btn', 
     block:true, 
     text:'Add+', 
     onClick:(val, obj, ev) => {

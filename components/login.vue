@@ -1,5 +1,5 @@
 <style scoped>
-  :deep( .form-css) {color:#444; background-color:#d0d5eb}
+  .form-css-form {color:#444; background-color:#aeb3c799}
 </style>
 
 <template>
@@ -11,9 +11,8 @@
     :container="containerOptions"
     :model= "myModel"
     :schema= "mySchema" 
-    @submit="submit"
+    @click:formbase-submit-button="submit"
     />
-    <!-- @click="logCustomEvent"   -->
     
   <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
   <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>
@@ -23,28 +22,23 @@
   import vFormBase from '@/vFormBase.vue'
   import { ref, computed } from 'vue'
   import Infoline from '@/components/infoline.vue'
-  import { logCustomEvent } from '@/lib.js'
   
   import { useRouter } from "vue-router"
   const router = useRouter();
 
-  // const submit = ({ model,schema,event }) => {
-  const submit = (model,schema,event) => {
-    // event.preventDefault();
+  const submit = (val, event) => {
     
-    console.info('SUBMIT DATA',model)
-    console.info('SUBMIT SCHEMA',schema)
-    console.info('SUBMIT EVENT', event)
-    // POST MODEL.DATA to SERVER 
+    // INLINE     <v-form-base @click:formbase-submit-button="submit" />  -> component signature (event)
+    // COMPONENT  schema:{ submitButton:{ onClick:submit, ...}            -> inline signature (val, event)  
+    console.log('DATA', val ? val.model : event.model)
     
-    // GOTO NEW ROUTE
-    const newRoute = '/basic'
-    console.info('ROUTE TO',newRoute)
+    const newRoute = 'basic'
+    console.warn('ROUTE TO',newRoute)
     router.push(newRoute)
   }
 
   
-  const containerOptions = { is:'form', class:'pa-8 form-css'  }
+  const containerOptions = { el:'form', class:'pa-8 form-css-form' }
       
   const visible = ref(false)
   const visibleIcon = computed(()=> visible.value ? 'mdi-eye-off' : 'mdi-eye')
@@ -79,12 +73,13 @@
       appendInnerIcon:visibleIcon, 
       onClickAppendInner: () => { visible.value = !visible.value; } // don't return any value
     },      
-    submit:{ 
+    submitButton:{ 
       el:'btn', 
-      type:'submit',
       text:'Send', 
       cols:12, 
+      color:'#555572',
       block:true, 
+      // onClick:submit
     }
   })
  
