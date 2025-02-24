@@ -27,6 +27,9 @@
     switch1: greenSwitch(true,false),
     switch2: greenSwitch('ON','OFF'),
     switch3: greenSwitch('YES','NO'),
+    switch4: {el:'greenBox'},
+    switch5: 'greenBox',
+    switch6: 'greenBox',
   })
 
 </script>

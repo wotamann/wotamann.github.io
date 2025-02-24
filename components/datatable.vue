@@ -112,7 +112,7 @@ const items = [
   },
 ]
 
-const myModel = ref({})
+const myModel = ref({ })
 
 const search = computed(()=>  myModel.value.search)
 

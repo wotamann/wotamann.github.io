@@ -1,6 +1,3 @@
-<style scoped>
-</style>
-
 <template>
    <h4>Handling of missing Properties in Model or Schema</h4>
    
@@ -12,23 +9,22 @@
 
     <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
     <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>
-
 </template>
 
 <script setup>
-  import { ref, reactive, toRefs, computed, onMounted, onUnmounted } from 'vue'
   import vFormBase from '@/vFormBase.vue'
   import Infoline from '@/components/infoline.vue'
+  import { ref } from 'vue'
 
   const myModel = ref({
-    ModelAndSchema: 'Defined Model and Schema',
+    ModelAndSchema: 'Model and schema are predefined',
     // No Prop in mySchema - property value remains untouched  
-    missingSchema: 'Missing Schema - Value in Model keeps untouched',  
+    missingSchema: 'No schema - model prop remains unchanged',  
   })
   const mySchema = ref({
-    ModelAndSchema: { el:'text', label: 'Defined in Model and Schema' },
+    ModelAndSchema: { el:'text', label: 'Model and schema are predefined' },
     // No Prop in myModel - property will be displayed & edited
-    missingModel: { el:'text', label: 'The missing Model will be added automatically' }  
+    missingModel: { el:'text', label: 'Missing value in model is added automatically' }  
   })
 
 

@@ -1,10 +1,9 @@
-<style >
-.xml { background-color: #f6f6f6;}
-</style>
 <style scoped>
+  :deep(.xml) { background-color: #f6f6f6;}
   .bg { background-color: #f6f6f6;margin-bottom: 6px;}
   .pre { font-size: 1rem; line-height:125%; text-align: left; min-height: 2rem; }
-  .terminal { color: #b75501; height: 5rem; overflow: auto; }
+  .terminal { color: #b75501; height: 5.6rem; overflow: auto; }
+  .pre-terminal { font-size: 1rem; line-height:1.1rem; text-align: left;  }
   .model { color:#0d6dc2; max-height: 400px; overflow-y: auto;}
   .model:focus {  outline: none; background-color: #0d6ec220; }
   .schema { color:#471f0c; border-left: 1px solid #ddd;  max-height: 400px; overflow-y: auto;}
@@ -24,7 +23,7 @@
     </v-col>
     <v-col cols="12" class="pa-2">
       <div ref="scrollableDiv" class="terminal" >
-        <pre class="pre" v-for="(cl, index) in consoleLog" :key="index">{{ cl }} </pre>
+        <pre class="pre-terminal" v-for="(cl, index) in consoleLog" :key="index">{{ cl }} </pre>
       </div>
     </v-col>
   </v-row>

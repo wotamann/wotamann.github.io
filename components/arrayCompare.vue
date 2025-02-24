@@ -1,5 +1,4 @@
 <template>
-  <v-container fluid>
     <h4>Compare Static Arrays vs Dynamic Arrays </h4>
 
     <v-form-base
@@ -7,19 +6,17 @@
       :model="myModel"
       :schema="mySchema"
       @update:modelValue="logModel"
-      @input="log"
+      @input="log"      
     />
 
     <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE -->
     <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>
-  </v-container>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
-import VFormBase from '@/vformbase.vue'
+import VFormBase from '@/vFormBase.vue'
 import Infoline from '@/components/infoline.vue'
+import { ref } from 'vue'
 import { log } from '@/lib'
 
 
@@ -30,7 +27,7 @@ const myModel= ref({
   ],
   
   Static_Schema: [
-      { done: false, title: `Static 0` },
+    { done: false, title: `Static 0` },
     { done: false, title: `Static 1` },
   ]
 })
@@ -38,25 +35,23 @@ const myModel= ref({
 const mySchema= ref({      
   Dynamic_Schema: {
     el:'array',    
-    container:{ is:'v-sheet', color:'blue-lighten-5'},     
+    container:{ el:'v-sheet', color:'blue-lighten-5'},     
     cols: 12,
-    schema: {
-      done: { el: 'checkbox', cols:3 },
-      title: { el: 'text', cols: 9 }
+    schema: { 
+      done: { el: 'checkbox', cols:3 }, 
+      title: { el: 'text', cols: 9 },
+      a: {
+        el:'array',    
+        container:{ el:'v-sheet', color:'blue-lighten-5'},     
+        cols: 12,
+        schema: { done: { el: 'checkbox', cols:3 }, title: { el: 'text', cols: 9 } }
+      }
     }
   },
   
-  divider:{ el:'divider', cols:12 },
-  
   Static_Schema: [
-    {
-      done: { el: 'checkbox', cols:3 },
-      title: { el: 'text', cols:9 },
-    },    
-    {
-      done: { el: 'checkbox', cols:3 },
-      title: { el: 'text', cols:9 },
-    }   
+    {done: { el: 'checkbox', cols:3 }, title: { el: 'text', cols:9 } },    
+    {done: { el: 'checkbox', cols:3 }, title: { el: 'text', cols:9 } }   
   ]
 })
 </script>

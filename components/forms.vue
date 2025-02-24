@@ -32,7 +32,7 @@
   // }
 
   const containerOptions = { 
-    is:'v-form', 
+    el:'v-form', 
     class:'pa-10', 
     style:{ backgroundColor:'#eee' }, 
     action:'/dev',

@@ -1,25 +1,23 @@
 <template>
-    <v-container class="container-box-new">  
-     <h4>Radio Group Example </h4>
+    <h4>Grouping 'radio' elements </h4>
+  
+    <!-- FORM-BASE-COMPONENT -->
+      <v-form-base 
+        :model= "myModel"
+        :schema= "mySchema"
+        :cols="6"
+        @update="log"
+      />
+    <!-- FORM-BASE-COMPONENT -->
     
-      <!-- FORM-BASE-COMPONENT -->
-        <v-form-base 
-          :model= "myModel"
-          :schema= "mySchema"
-          :cols="6"
-          @update="log"
-        />
-      <!-- FORM-BASE-COMPONENT -->
-      
-      <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
-      <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>
-    </v-container>
+    <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
+    <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>
   </template>
   
   <script setup>
     import vFormBase from '@/vFormBase.vue'
-    import { ref } from 'vue'
     import Infoline from '@/components/infoline.vue'
+    import { ref } from 'vue'
     import { log } from '@/lib.js'
     
     // https://vuetifyjs.com/en/api/v-radio/
@@ -35,11 +33,11 @@
     ]
   
     const myModel = ref({
-      radioLine:'wifi',
-      // unset props will be auto-added    
-      // radioCol:'bluetooth',
-      radioL:'L',     
-      radioC:'R',     
+      // radioLine:'wifi',
+      // // unset props will be auto-added    
+      // // radioCol:'bluetooth',
+      // radioL:'L',     
+      // radioC:'R',     
     })
     
     // https://vuetifyjs.com/en/api/v-radio-group/

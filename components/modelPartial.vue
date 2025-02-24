@@ -26,7 +26,7 @@
   // Try to remove model also in <v-form-base :model= "myModel"/>
   // It will work, but you can get changes only from update:modelValue event
   //
-  // Create Model doesn't work with { el:'array',... } or {'el:'group',... } or {'el:'wrap',... } in Schema
+  // Create Model doesn't work with { el:'array',... } or {'el:'group',... } or {'el:'view',... } in Schema
   // in this cases the model must exist !!! 
 
   const myModel = ref({

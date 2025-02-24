@@ -88,7 +88,7 @@ const disabled =ref(false)
 const readonly =ref(false)
 
 const validateOnString = ['input', 'blur', 'submit' ]
-const items = ['Musk', 'Jobs', 'Taleb', 'Harari']
+const items = ['Satoshi', 'Taleb', 'Einstein']
 
 // Helper & Partial Functions
 const minLen = l => v => v?.length >= l || `min. ${l} Characters`

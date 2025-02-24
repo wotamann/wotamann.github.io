@@ -40,7 +40,7 @@
       },
       checkgrouped:{ 
         el:'group', 
-        container:{ is:'v-card', title:'Group', class:'pa-2', color:'blue-lighten-4'},      
+        container:{ el:'v-card', title:'Group', class:'pa-2', color:'blue-lighten-4'},      
         schema:{
           checkgrouped: { 
             check: { el: 'checkbox', label: 'check in group',color:'blue' },
