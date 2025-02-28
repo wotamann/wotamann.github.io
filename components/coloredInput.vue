@@ -7,7 +7,7 @@
     :schema= "mySchema"             
     @update:customEvent="logCustomEvent"
   />
-{{ color }}
+
   <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
   <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>
 </template>
@@ -18,13 +18,13 @@
   import { ref, computed } from 'vue'
   import { logCustomEvent, logInline, logButton, logIcon } from '@/lib' 
   
-  const items = [1,2,3,4]
+  const items = [1,2,3]
   const color = computed( ()=> myModel.value.color  )  
   const showColor = () => mySchema.value.color.hidden = !mySchema.value.color.hidden
 
   const myModel = ref({
     text:'texty',
-    selectMultiple:[2,4],
+    selectMultiple:[2,3],
     switch:true,
     checkbox:true,
     color:'#1A89EBFF'
@@ -42,5 +42,4 @@
     // 
     color: { el:'v-colorPicker', mode:'hex', hideInputs:true ,hidden:true  },
   })
-  
 </script>

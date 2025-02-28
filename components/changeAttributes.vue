@@ -1,38 +1,34 @@
 <template>
-  <v-container class="container-box-new">  
-  
-    <h4>Async loading of Schema, Model and at last Grid-Layout</h4>
+  <h4>Async loading of Schema, Model and at last Grid-Layout</h4>
 
 
-      <!-- FORM-BASE-COMPONENT -->    
-      <v-form-base v-if="flush"
-      :model= "myModel"
-      :schema= "mySchema"
-      :config= "myConfig"
-      :cols= "cols"
-      @input="log"
-      />
+    <!-- FORM-BASE-COMPONENT -->    
+    <v-form-base v-if="flush"
+    :model= "myModel"
+    :schema= "mySchema"
+    :config= "myConfig"
+    :cols= "cols"
+    @input="log"
+    />
 
 
-      <br>
-      <p class="title">{{msg}}</p>      
-      <br>
-      {{ mySchema }} 
-      <br>
-      {{ myModel }} 
-      <br>
-      <v-btn @click="changeCols">COLS</v-btn>
-      <v-btn @click="changeModel">Model</v-btn>
-      <v-btn @click="newSchema">New Schema</v-btn>
-      <v-btn @click="changeSchema">Schema</v-btn>
-      <v-btn @click="changeConfig">Config</v-btn>
-      <br>
+    <br>
+    <p class="title">{{msg}}</p>      
+    <br>
+    {{ mySchema }} 
+    <br>
+    {{ myModel }} 
+    <br>
+    <v-btn @click="changeCols">COLS</v-btn>
+    <v-btn @click="changeModel">Model</v-btn>
+    <v-btn @click="newSchema">New Schema</v-btn>
+    <v-btn @click="changeSchema">Schema</v-btn>
+    <v-btn @click="changeConfig">Config</v-btn>
+    <br>
 
-      <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
-      <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>
-      
-    </v-container>
-</template>
+    <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
+    <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>
+  </template>
 
 <script setup>
 // import VFormBase from '@/vFormBase.vue'

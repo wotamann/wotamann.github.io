@@ -1,19 +1,12 @@
 <template>
   <h4>Add, edit and remove items in nested array</h4>
   
-     <!-- FORM-BASE-COMPONENT -->
-     <v-form-base 
-      :model="myModel"
-      :schema="mySchema"
-      :config="{ 
-        _noMapping:false,
-        _noAutoSchema:false,
-        _noAutoModel:true,
-        _useOrder:true
-      }"        
-      :cols="12"
-      @click="log"
-      />
+    <!-- FORM-BASE-COMPONENT -->
+    <v-form-base 
+    :model="myModel"
+    :schema="mySchema"
+    @click="log"
+    />
     
    <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
    <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>
@@ -59,7 +52,6 @@ const myModel = ref({
   tasks: {
     el: 'array',
     container:{ el:'v-sheet', class:'my-4 pa-2', color:'grey-lighten-3' },
-    // container:{ el:'div', class:'pa-1', style:{ backgroundColor:'#eee',margin:'6px' } },
     cols: 12,
     schema: {
       done: { el: 'checkbox', cols:2, label: 'OUT' },
@@ -77,7 +69,6 @@ const myModel = ref({
           remove: { el: 'btn', cols:3, block:true, icon: 'mdi-delete', text:'IN-TASK', color: 'red-lighten-1', onClick:removeInnerTask}
         }
       }
-  
     }
   }
  })

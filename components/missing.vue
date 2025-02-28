@@ -17,12 +17,12 @@
   import { ref } from 'vue'
 
   const myModel = ref({
-    ModelAndSchema: 'Model and schema are predefined',
+    modelAndSchema: 'Model and schema are predefined',
     // No Prop in mySchema - property value remains untouched  
     missingSchema: 'No schema - model prop remains unchanged',  
   })
   const mySchema = ref({
-    ModelAndSchema: { el:'text', label: 'Model and schema are predefined' },
+    modelAndSchema: { el:'text', label: 'Model and schema are predefined' },
     // No Prop in myModel - property will be displayed & edited
     missingModel: { el:'text', label: 'Missing value in model is added automatically' }  
   })

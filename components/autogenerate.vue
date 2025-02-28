@@ -1,8 +1,10 @@
 <template>
-  <h4>Try to build view based on model. No schema required</h4>
+  <h4>Build view based on model. no/partial definition of schema required</h4>
   
   <v-form-base 
+    :config="{_buildSchemaFromModel:true}"
     :model="myModel"          
+    :schema="mySchema"          
     :cols=6
     @update="logModel"
   />     
@@ -17,31 +19,28 @@
   import Infoline from '@/components/infoline.vue'
   import { logModel } from '@/lib'
   
-  const mySchema = ref({container:{el:'frame'}})
+  // IMPORTANT: if config._buildSchemaFromModel=true then the order of props in MODEL determines the order in which they are displayed!
   const myModel = ref({
-    people:[
-      { name: {
-          firstname:'John',         
-          lastname: 'Smith',
-        },          
-        age:32,        
-        email: 'smith@mail.com',          
-        todos: [
-          {done: true, todo: 'plan holyday'},
-          {done: true, todo: 'check flight LA'},
-        ]
-      },
-      // { name: {
-      //     firstname:'Jane',         
-      //     lastname: 'Stoner',
-      //   },          
-      //   age:28,        
-      //   email: 'stoner@mail.com',          
-      //   todos: [
-      //     {done: true, todo: 'schedule workout' },
-      //   ]
-      // }
-    ]
+    name: {
+      firstname:'John',         
+      lastname: 'Smith',
+    },   
+    email: 'smith@mail.com',     
+    age: 32,        
+    hr:'Placeholder for <HR>',     
+    todos: [
+      {done: true, todo: 'plan holyday'},
+      {done: false, todo: 'check flight LA'},
+    ],
   })
- 
+  
+  const mySchema = ref({
+    email: 'email',           
+    hr:{ el:'div',style:'height:4px;backgroundColor:red', cols:12},
+
+    IgorePropsNotInModel:'checkbox'
+  })
+
+  
+
 </script>

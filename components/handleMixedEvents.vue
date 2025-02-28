@@ -1,14 +1,14 @@
 <template>
-  <h4>Mix Component-Events with Inline-Events</h4>
+  <h4>Combine component-events with inline-events</h4>
 
   <!-- FORM-BASE-COMPONENT -->
   <v-form-base 
-    id="formbase"
+    id="formbase-event"
     :model= "myModel"
     :schema= "mySchema"
     :cols="4"
-    @update:customEvent:formbase-component="logModel" 
-    @update:customEvent:formbase-both="logNamedElement" 
+    @update:customEvent:formbase-event-component="logNamedElement" 
+    @update:customEvent:formbase-event-both="logNamedElement" 
     />
     <!-- @update:customEvent="logElement"  -->
 
@@ -20,7 +20,7 @@
   import vFormBase from '@/vFormBase.vue'
   import Infoline from '@/components/infoline.vue'
   import { ref } from 'vue'
-  import { logElement, logInline, logModel, logNamedElement } from '@/lib'
+  import { logInline, logNamedElement } from '@/lib'
 
   const el = 'text'
 

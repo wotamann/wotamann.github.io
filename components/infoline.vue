@@ -82,6 +82,8 @@
   import { isFunction } from 'lodash';
   import { inject, provide, ref, unref, reactive, toRefs, nextTick, watch, watchEffect, computed, onMounted, useTemplateRef } from 'vue'
   import { useRoute } from 'vue-router';
+  const BASE_ROUTE  = import.meta.env.VITE_BASE_ROUTE;
+
   // CONST
   const modelValue = defineModel('modelValue')
   const schemaValue = defineModel('schemaValue')
@@ -101,7 +103,7 @@
   const url = './components'
   const functionPlaceholder = '[Function]' 
   const fileObjectToString = (val) => `${val.name} - (File Object)` 
-  const fileName = ref(`${route.path?.slice(1)}.vue`)
+  const fileName = ref(`${route.path?.slice(1).replace(BASE_ROUTE,'')}.vue`)
   const path = `${url}/${fileName.value}`
   const consoleLog =ref([])
   const logMaxEventLines = 128

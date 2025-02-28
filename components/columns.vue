@@ -1,18 +1,16 @@
 <template>
-  <v-container class="container-box-new">  
-   <h4>Use Component or Schema 'cols' to manage Grid</h4>
-  
-    <!-- FORM-BASE-COMPONENT -->
-    <v-form-base 
-      :model= "myModel"
-      :schema= "mySchema"
-      :cols="12"
-    />
+  <h4>Use Component or Schema 'cols' to manage Grid</h4>
 
-    <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
-    <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>
+  <!-- FORM-BASE-COMPONENT -->
+  <v-form-base 
+    :model= "myModel"
+    :schema= "mySchema"
+    :cols="12"
+  />
 
-  </v-container>
+  <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
+  <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>
+
 </template>
 
 <script setup>

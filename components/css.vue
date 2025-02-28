@@ -39,20 +39,17 @@
 </style>
 
 <template>
-  <v-container class="container-box-new">
+  <h4>Play around with CSS</h4>
   
-    <h4>Play around with CSS</h4>
-    
-    <!-- FORM-BASE-COMPONENT -->
-    <v-form-base
-      id="form-base-css"
-      :model="myModel"
-      :schema="mySchema"
-    />    
-    
-    <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
-    <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>    
-  </v-container>
+  <!-- FORM-BASE-COMPONENT -->
+  <v-form-base
+    id="form-base-css"
+    :model="myModel"
+    :schema="mySchema"
+  />    
+  
+  <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
+  <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>    
 </template>
 
 <script setup>
