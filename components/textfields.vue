@@ -18,27 +18,26 @@
     3) Use <v-form-base> attribute 'col' for global GRID-Setting: 
       string   :cols:"6"  
       object   :cols="{ cols:12, sm:6, md:4 }" 
-
   -->
   
   <!-- FORM-BASE-COMPONENT -->   
   <v-form-base 
     :model="myModel"
     :schema="mySchema"
-    :cols="{ lg:4, sm:12, md:6 }"
+    :cols="{ sm:12, md:6, lg:4, xl:2 }"
     @input="log"
     @click="log"
   />
-  
+  {{ ss }}
   <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
   <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>
 </template>
 
 <script setup>
-  import VFormBase from '@/v-form-base.es.js'
-  import Infoline from '@/components/infoline'
+  import VFormBase from '@/vFormBase.vue'
+  import Infoline from '@/components/infoline.vue'
   import { log } from '@/lib'
-  import { ref } from 'vue'
+  import { ref,computed } from 'vue'
 
   const myModel = ref({
     password: 'abcdefgh',
@@ -49,6 +48,7 @@
     date:'2020-02-25'
   })
 
+  const ss = computed(()=> myModel.value.range)
   
   const mySchema = ref({ 
     password: { 
@@ -66,12 +66,12 @@
     range:{ 
       el:'text', 
       type:'range', 
-      label: 'Range:' + myModel.value.range,    // this works only with computed schema 
+      label: 'Range:' + ss,    // this works only with computed schema 
     },        
     color:{ 
       el:'text', 
       type:'color',
-      color: myModel.color,     // computed schema updates with changing color
+      color: myModel.value.color,     // computed schema updates with changing color
       prependIcon: 'palette', 
       label:'Color'
     },

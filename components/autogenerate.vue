@@ -30,15 +30,17 @@
     hr:'Placeholder for <HR>',     
     todos: [
       {done: true, todo: 'plan holyday'},
-      {done: false, todo: 'check flight LA'},
-    ],
+      {done: true, todo: 'check flight LA'},
+      {done: true, todo: 'check flight LA'},
+    ]
   })
   
   const mySchema = ref({
     email: 'email',           
     hr:{ el:'div',style:'height:4px;backgroundColor:red', cols:12},
-
-    IgorePropsNotInModel:'checkbox'
+    todos: [ 
+      , , {done: { el:'switch', color:'green'}, }
+    ]
   })
 
   
