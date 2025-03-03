@@ -131,15 +131,13 @@
     }
     return value
   }
+
   const deepIterate = (obj, objS) =>{
     for (const key in obj) {
       if (obj.hasOwnProperty(key)) {
         const value = obj[key];
         const valueS = objS[key]
 
-        // console.warn(key, obj)        
-        //   console.log(key, objS)        
-         
         if (typeof value === 'object' && value !== null) {
           deepIterate(value, valueS);
         } else {
@@ -187,6 +185,7 @@
   const resetSchema = () => {
     preSchema.value.innerText = toJSON(resetSchemaValue)
   }
+
   const updateSchema = () => {
     try {
       const schema= JSON.parse(preSchema.value.innerText)          
@@ -221,7 +220,6 @@
       snackbar.value = true    
     }
   }
-
   
   const scrollToBottom = async () => {
     if (scrollableDiv.value) {
