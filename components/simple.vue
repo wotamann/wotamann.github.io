@@ -4,8 +4,7 @@
   <v-form-base
     :model= "myModel"
     :schema= "mySchema"             
-    @update:modelValue="logModelValue"
-    @update:customEvent="logCustomEvent"
+    @update:modelValue="logModel"
     />
 
   <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
@@ -16,15 +15,13 @@
   import vFormBase from '@/vFormBase.vue'
   import Infoline from '@/components/infoline.vue'
   import { ref } from 'vue'
-  
-  const logModelValue = (val) => console.info(val );
-  const logCustomEvent = (ev) => console.info('value:' +ev?.modelValue + ' - emitter:' + ev?.emitter + ' - path:' + ev?.path , ev );
-   
+  import { logModel } from '@/lib'
+
   const myModel = ref({})
     
   const mySchema = ref({
-    myText: { el:'v-text-field' }     
-    // write shorthand -> myText:'text' will map to => myText:{ el:'v-text-field', label:'myText', placeholder:'myText' }
+    textShort: 'text',     // map to => { el:'v-text-field', label:'textShort', placeholder:'textShort' }
+    text: { el:'text', label:'label', placeholder:'placeholder', hint:'hint', clearable:true },     
   })
   
 </script>
