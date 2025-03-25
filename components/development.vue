@@ -38,8 +38,8 @@
       @update:model-value:formbase-tasks-1-ta-s0k-0-task-u-p-0-group-i8-group-check4="logElement"
       @update:modelValue:formbase-tasks-1-taS0k-0-taskUP-0-groupI8-groupTitle="logElement"
       @update:model-value="logModel"
-      :tooltip="{ contentClass:'tooltip-background-blue', text:'@content'}"
       />  
+      <!-- :tooltip="{ contentClass:'tooltip-background-blue', text:'@content'}" -->
       <!-- ATTR ORDER IS RELEVANT  'click:formbase...' must be before 'click' fall through, otherwise it consumes all clicks ...  ! -->
       <!-- 
         
@@ -235,6 +235,8 @@ const mySchema = ref({
     deepTitle: {el: 'text', cols:4, label: 'DEEP', clearable:true, onInput }    
   },
 
+  line: { el:'hr', _ignoreModel:true },
+    
   groupX:{ 
     el:'group', 
     // 
@@ -245,6 +247,9 @@ const mySchema = ref({
       groupTitle: {el: 'v-textarea', cols:6, label: 'Group', clearable:true,onInput,['onUpdate_modelValue']:onUpdateModelValue },
       // groupTitle: {el: 'text', cols:6, label: 'Group', clearable:true },
       // groupTitle: {el: 'text', cols:6, label: 'Group', clearable:true, onClickClear  },
+    
+      line: { el:'hr', _ignoreModel:true },
+    
       groupI8:{ 
         el:'group', 
         // 
@@ -258,6 +263,8 @@ const mySchema = ref({
           // groupTitle: {el: 'text', cols:6, label: 'Group', clearable:true, onInput,['onUpdate_modelValue']:onUpdateModelValue },
           // groupTitle: {el: 'text', cols:6, label: 'Group', clearable:true,onClickClear, ['onUpdate_modelValue']:onUpdateModelValue },
           groupTitle: {el: 'v-text-field', cols:6, label: 'Group', clearable:true },
+          line: { el:'hr', _ignoreModel:true },
+    
           // groupTitle: {el: 'textLine', cols:6, label: 'Group', clearable:true, onInput },
           groupTitle1: {el: 'v-text-field', cols:6, label: 'Group', clearable:true, onClickClear  },
         }

@@ -49,7 +49,7 @@
         }
       },
     },
-    hr:{el:'divider', cols:12},
+    hr:{el:'hr', _ignoreModel:true, cols:12},   
     buildModel: {
       a:{
         check: { el: 'checkbox', label:'AUTO A', color:'#2cf', nullValue:true },         

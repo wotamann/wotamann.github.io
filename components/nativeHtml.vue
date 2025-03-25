@@ -1,10 +1,15 @@
+<style scoped>
+  :deep(.native-html) { background-color: #ba7e56; color:white; display: grid; place-items: center; height:4rem; }
+</style>
 <template>
-  <h4>Combine native HTML with vuetify elements</h4>
+  <h4>Use native HTML and '_ignoreModel' to prevent changes to the model</h4>
   
   <!-- FORM-BASE-COMPONENT -->
   <v-form-base
     :model= "myModel"
-    :schema= "mySchema"             
+    :schema= "mySchema" 
+
+    :config="{_buildModelNode:false}"            
   />
   
   <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
@@ -16,32 +21,24 @@
   import Infoline from '@/components/infoline.vue'
   import { ref } from 'vue'
   
-  const onClick = (v,e) => console.log(e);
+  const myModel = ref({})
     
-  const myModel = ref({
-    array: [
-      {},
-      { check: true, text: `item 1` },
-  ]
-  })
-    
-  // IMPORTANT: props order in schema determines display order!
+  
   const mySchema = ref({
-    text: { el:'v-text-field', label:'v-text-field' },    
-    div: { el:'div', style:`padding:1rem;backgroundColor:#99ccff;`, innerText:`I am a 'div' element` },
-    link:{ el:'a', href:'https://github.com', innerText:`I am 'a' hyperlink`, style:'padding:1rem;backgroundColor:#99ccff80; display: grid; place-items: center;'  },
+    text1: 'v-text-field' ,        
+    // _ignoreModel:true - prevent adding element into model 
+    // Useful only in rare cases if config._buildModelNode is explicit set to 'true'. Default value is 'false'
+    div: { el:'div', class:`native-html`, innerText:`I am 'div' element not in Model`, _ignoreModel:true },
     
-    hline:{ el:'hr' },
-
-    array: {
-    el:'array',    
-    container:{ el:'div', style:'margin:0px; padding:.5rem;backgroundColor:#99ccff30'},     
-    schema: {
-      title:{ el:'h5', onClick, innerText:`I am a 'h5' element`, style:'padding:0.5rem;color:#58b;backgroundColor:#99ccff80; display: grid; place-items: center;' },
-      check: { el: 'checkbox', label:'v-checkbox',cols:4  },
-      text: { el: 'text', label:'v-text-field', cols: 8 },
-    }
-  },
+    text2: { el:'v-text-field', label:'v-text-field 2' },     
+    // _ignoreModel:true - dont update into model 
+    // Useful only in rare cases if config._buildModelNode is explicit set to 'true'. Default value is 'false'
+    hr:{ el:'hr', _ignoreModel:true }, 
+    
+    text3: { el:'v-text-field', label:'v-text-field 3' },    
+    // _ignoreModel:true - dont update into model.   
+    // Useful only in rare cases if config._buildModelNode is explicit set to 'true'. Default value is 'false'
+    link:{ el:'a', href:'https://github.com', innerText:`I am 'a' hyperlink`, class:`native-html`, _ignoreModel:true  },
   })
   
 </script>

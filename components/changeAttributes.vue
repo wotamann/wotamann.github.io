@@ -1,5 +1,5 @@
 <template>
-  <h4>Async loading of Schema, Model and at last Grid-Layout</h4>
+  <h4>Async loading of schema, model and at last layout</h4>
 
 
     <!-- FORM-BASE-COMPONENT -->    

@@ -1,5 +1,5 @@
 <template>
-  <h4>Async loading by flushing Component</h4>
+  <h4>Async loading and flushing component</h4>
 
   <!-- FORM-BASE-COMPONENT -->    
   <v-form-base v-if="flush"

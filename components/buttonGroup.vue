@@ -1,10 +1,11 @@
 <template>
-    <h4>Buttons and Button-Toggle</h4>
+    <h4>Buttons and button groups|toggle</h4>
   
     <!-- FORM-BASE-COMPONENT -->
     <v-form-base 
       :model= "myModel"
-      :schema= "mySchema"
+      :schema= "mySchema"      
+      :row="{noGutter:false}"
       :cols=3
       @click="logClick"
     />
@@ -36,13 +37,14 @@
   const options = [
     { icon: { icon:'mdi-wifi', end:false }, text:'w', value: 'wifi', baseColor:'blue-lighten-5', color:'blue-darken-3', }, 
     { icon: 'mdi-printer', text:'p', value: 'print' },
-    { icon: {icon:'mdi-bluetooth', start:true },  label:'l', value: 'bluetooth' },
+    { icon: {icon:'mdi-bluetooth', start:true, color:'purple' },  label:'l', value: 'bluetooth' },
   ]
   
   const optionsIcon = [
     { icon: 'mdi-wifi',  value: 'wifi', baseColor:'blue-lighten-5', color:'blue-darken-3' }, 
     { icon: 'mdi-printer', value: 'print' },
-    { icon: 'mdi-bluetooth',  value: 'bluetooth' },
+    // { icon: 'mdi-bluetooth',  value: 'bluetooth' },
+    { icon: { icon:'mdi-bluetooth', size:38, color:'blue-darken-1'}, value: 'bluetooth' },
   ]
 
   const optionsText = [
@@ -64,7 +66,7 @@
     btn6:{ el:'btn', icon:'mdi-check-circle', text:'Default', block,variant, color },
     btn7:{ el:'btn', icon:'mdi-check-circle', text:'Large', block, color, variant, size:'large' },
     btn8:{ el:'v-btn', icon:'mdi-check-circle', text:'X-Large', block, color, variant, size:'x-large' },
-    btn9:{ el:'btn', icon:{ icon:'mdi-check-circle', start:true}, text:'ICON START', block, color },
+    btn9:{ el:'btn', icon:{ icon:'mdi-check-circle', start:true, size:32, color:'yellow'}, text:'ICON START', block, color },
     btn10:{ el:'btn', icon:{ icon:'mdi-check-circle', end:true}, text:'ICON END', block, color },
     btn11:{ el:'btn', icon:'mdi-thumb-up', variant:'text', color:'green', size:'x-large',onClick:(v,e) => 'thumb up' },
     btn12:{ el:'v-btn', icon:'mdi-thumb-down', variant:'text', color:'red',size:'x-large', onClick:(v,e) => 'thumb down' },        

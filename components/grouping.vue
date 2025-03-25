@@ -3,13 +3,14 @@
 
   <!-- FORM-BASE-COMPONENT -->
   <v-form-base
-  :model="myModel"
-  :schema="mySchema"
-  @input="log"
-  :config="{_buildModel:true}"
+    :model="myModel"
+    :schema="mySchema"
+    @input="log"
+    :config="{_buildModelFrame:true}"
   />
-  <!-- :config="{_buildModel:true}"  FALSE - DOESN'T WORK PROP WITH GROUPED SCHEMA -->
-   
+  <!-- :config="{_buildModelFrame:true}"  BUILD MODEL STRUCTURE  FALSE - DOESN'T WORK PROP WITH GROUPED SCHEMA -->
+  <!-- :config="{_buildModelNode:true}"  BUILD MODEL STRUCTURE AND ADD ALL NODES with defaUlt values -->  
+
   <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
   <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>
 </template>
@@ -46,10 +47,3 @@
     },
   })
 </script>
-
-<style scoped>
-  /* :deep( .type-group-name) { background-color: #f07000;} 
-  :deep( .key-group-check .v-input__control) { background-color: #f07000;} 
-  :deep(.key-group-level-check .v-input__control) { background-color: #f07000;} 
-  :deep( .key-group-level-name) { background-color: #f07000;} */
-</style>

@@ -9,21 +9,20 @@
 
 <template>
   <v-container fluid>
-    <h4>Form Validation using Rules in Schema</h4>
+    <h4>Playground: Form validation using rules in schema</h4>
 
     <v-form
       ref="myForm"
       v-model="formValid"
-      :validate-on="validateOn"
+      :validateOn="validateOn"
       :fast-fail="fastFail" 
       :disabled="disabled"
       :readonly="readonly"
       @submit.prevent
     >
     
-
       <!-- FORM-BASE-COMPONENT -->
-      <v-form-base
+      <v-form-base 
         id="form-base-validate"
         :class="formValid === true ? 'valid' : formValid === false ? 'invalid': ''"
         :model="myModel"
@@ -38,30 +37,21 @@
     <!-- PLAYGROUND -->
     <br/>
     <div class="form-base-validate-playground">
-      <h4>Playground</h4>
-      <v-divider/>
+      <h4>Validation</h4>
       <v-divider/>
       <v-checkbox-btn v-model="fastFail" @click="fastFail=!fastFail" label="fastFail"></v-checkbox-btn>
       <v-checkbox-btn v-model="disabled" @click="disabled=!disabled" label="disabled"></v-checkbox-btn>
       <v-checkbox-btn v-model="readonly" @click="readonly=!readonly" label="readonly"></v-checkbox-btn>
       <v-select v-model="validateOn" label="Validate on Selection" :items="validateOnString"></v-select>
 
-      <v-btn color="green lighten-3" @click= "validate">
-        Validate
-      </v-btn>
-      <v-btn dark color="red lighten-3" @click= "reset">
-        Reset
-      </v-btn>
-      <v-btn dark color="orange lighten-3" @click= "resetValidation">
-        Reset Validate
-      </v-btn>
+      <v-btn color="green lighten-3" @click= "validate">Validate</v-btn>
+      <v-btn color="orange lighten-3" @click= "resetValidation">Reset Validate</v-btn>
+      <v-btn color="red lighten-3" @click= "reset">Reset</v-btn>
       <br/>
-      <!-- <p>{{myForm?.items}}</p> -->
       <br/>
-      <p class="form-base-validate-error">{{myForm?.errors}}</p>
+      <p v-show="myForm?.errors.length>0" class="form-base-validate-error">{{myForm?.errors}}</p>
     </div>
     
-
     <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
     <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>
    
@@ -70,31 +60,40 @@
 
 <script setup>
 import vFormBase from '@/vFormBase.vue'
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import Infoline from '@/components/infoline.vue'
 import { log, logModel } from '@/lib.js'
 
-
 const logSubmit = (e) => {
-  log(e)
   if (formValid.value) console.log('LOG# SUBMIT OK -> FETCH FORM', e?.model )
   if (!formValid.value) console.error('LOG# SUBMIT ERROR ON FORM', e?.model )
 } 
 const myForm = ref(null);
 const formValid =ref(null)
-const validateOn =ref('blur')  // 'input'  'submit'
+const validateOn =ref('submit')  // 'input'  'blur'
 const fastFail =ref(true)
 const disabled =ref(false)
 const readonly =ref(false)
 
 const validateOnString = ['input', 'blur', 'submit' ]
-const items = ['Satoshi', 'Taleb', 'Einstein']
+const items = [ 'Hilbert', 'Noether ', 'Einstein']
 
 // Helper & Partial Functions
 const minLen = l => v => v?.length >= l || `min. ${l} Characters`
 const maxLen = l => v => v?.length <= l || `max. ${l} Characters`
 const required = msg => v => !!v || msg
 const requiredArray = msg => v => (Array.isArray(v) && v.length>1) || msg
+
+// Password visibility
+const visible = ref(false)
+const appendIcon = computed(()=> visible.value ? 'mdi-eye-off' : 'mdi-eye')
+const type = computed(()=> !visible.value ? 'password' : 'text' )
+const onClickAppend = () => { visible.value = !visible.value; }
+
+// Validation FN
+const validate = ()  =>  myForm.value.validate()
+const reset = () => myForm.value.reset()
+const resetValidation = () => myForm.value.resetValidation()
 
 // Rules
 const rules = {
@@ -111,27 +110,14 @@ const myModel = ref({
   email: '',
   password: 'abcde',
   select: null,
-  multiple: ['Taleb'],
+  multiple: ['Hilbert'],
 })
 
 const mySchema = ref({
   email: { el: 'email', label: 'Email', rules: [rules.requiredEmail, rules.validEmail] },
-  password: { el: 'password', label: 'Password', hint: '6 to 12 Chars', appendIcon: 'mdi-eye', counter: 12, rules: [rules.requiredPassword, rules.min6, rules.max12], clearable: true },
+  password: { el: 'text', type, label:'Password', hint: '6 to 12 Chars', appendIcon, counter: 12, rules: [rules.requiredPassword, rules.min6, rules.max12], onClickAppend },
   select: { el: 'select', label: 'Select', items, rules: [rules.requiredSel] },
   multiple: { el: 'select', label: 'Multi-Select', clearable:true, items, rules: [rules.requiredSelMult], multiple: true },
   submit: {el:'btn', type:'submit', cols:12, block:true, text:'Submit'},
 })
-
-const validate = ()  => {
-  console.error(myForm.value);
-  myForm.value.validate()
-}
-
-const reset = () => {
-  myForm.value.reset()
-}
-const resetValidation = () => {
-  myForm.value.resetValidation()
-}
-
 </script>

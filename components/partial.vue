@@ -1,13 +1,26 @@
-<template>
-  <h4>Custom element factory</h4>
+<style>
+  #partial-form {background-color: #eee; }
+</style>
 
-  <!-- FORM-BASE-COMPONENT -->
+<template>
+  
+  <h4>Form from 'myModel'</h4>
   <v-form-base    
+    id="base-form"   
     :model= "myModel"
     :schema= "mySchema"
     @update:customEvent="log"
   />
-
+  
+  <h4>Separate form linked to 'myModel.partial'</h4>
+  <v-form-base 
+    id="partial-form" 
+    class="my-6"      
+    :model= "myModel.partial"
+    :schema= "mySchema.partial"
+    @update:customEvent="log"
+  />
+    
   <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
   <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>
 </template>
@@ -22,15 +35,16 @@
   const nullValue='Yes'
   const cols = { cols:4, offset: 2}    
   const checker = (color = 'grey', label='Yes/No') => ({ el:'checkbox', label, trueValue:'Yes', falseValue:'No', color, nullValue, cols })
-  const switcher = (color = 'blue', label='On/Off') => ({ el:'switch', label, trueValue:'On', falseValue:'Off', color, cols })
-
-  const myModel = ref({})
+  
+  const myModel = ref({partial:{}})
     
   const mySchema = ref({
     r: checker('red','Yes/No in Red'),   
     g: checker('green','Yes/No in Green'),   
-    o: switcher('orange'),   
-    b: switcher(),
+    partial:{
+      o: checker('orange','Yes/No in Orange'),   
+      b: checker('blue','Yes/No in Blue'),   
+    }     
   })
 
 </script>

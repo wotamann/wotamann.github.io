@@ -2,7 +2,7 @@
   :deep(.xml) { background-color: #f6f6f6;}
   .bg { background-color: #f6f6f6;margin-bottom: 6px;}
   .pre { font-size: 1rem; line-height:125%; text-align: left; min-height: 2rem; }
-  .terminal { color: #b75501; height: 5.6rem; overflow: auto; }
+  .terminal { color: #b75501; height: 7.6rem; overflow: auto; }
   .pre-terminal { font-size: 1rem; line-height:1.1rem; text-align: left;  }
   .model { color:#0d6dc2; max-height: 400px; overflow-y: auto;}
   .model:focus {  outline: none; background-color: #0d6ec220; }

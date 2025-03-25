@@ -5,8 +5,11 @@
   */
 
   /* ASSUMING:  <v-form-base id="myformbase" > */
+ 
   /* key-* selector works in all descendant myformbase components */
+  
   /* key-myformbase-* selector works in myformbase components with id:myformbase*/
+  /* key-myformbase-selectcase - Select key 'selectcase' on specific [id].[path]-[key]  in model */
   
   /* Select 'selectCase' key */
   :deep(.key-select-case .v-input__control){ background-color: #ff400610; }  
@@ -18,14 +21,17 @@
   :deep(.key-myformbase-selectcase) .v-input__control{ color: #0063c6; }  
   
   /* component classes: id-myformbase key-deep key-select-case key-myformbase-deep-select-case el-v-select el-myformbase-v-select */
+  /* key-deep - Select all keys with name 'deep' in deep, nested model  */
   :deep(.key-deep .v-input__control){ background-color: #07680010; }  
   :deep(.key-myformbase-deep-select-case .v-input__control){ color: #076800; }  
   
   /* myformbase-group classes: myformbase-container myformbase-group-container */
   :deep(.myformbase-group-container){ padding: 24px;background-color: #fff53c6c;  }  
+  
   /* component classes: id-myformbase id-myformbase-group key-select-case key-myformbase-group-select-case el-v-select el-myformbase-group-v-select */
-  :deep(.id-myformbase-group .v-input__control){ background-color: #9e6e0015; }  
-  :deep(.key-myformbase-group-select-case .v-input__control){  color: #825b00;  }   
+  :deep(.container-myformbase-group .v-input__control){ background-color: #9e6e0015; }  
+  :deep(.key-myformbase-group-select-case .v-input__control){  color: #825b00; }
+     
 </style>
   
 <template>
@@ -36,8 +42,8 @@
     id="myformbase"
     :model= "myModel"
     :schema= "mySchema"   
-    :config="{_buildModelNode:true}"          
   />
+  <!-- :config="{_buildModelNode:true}"           -->
   
   <!-- DISPLAY EVENTS, MODEL, SCHEMA and CODE  -->    
   <infoline v-model:modelValue="myModel" v-model:schemaValue="mySchema"/>
@@ -70,6 +76,10 @@
       schema:{ 
         // camelCase
         selectCase:{ el:'select', label:'group.selectCase -> .key-myformbase-group-select-case', items},
+        deep:{
+        // camelCase
+        selectCase:{ el:'select', label:'deep.selectCase -> .key-myformbase-group-deep-select-case', items},
+      },
       }
     }
 
